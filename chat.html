@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الشات | مجتمع الفايب كودينج</title><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#0A1730">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="plat.css"></head>
+<body class="plt" data-p="chat"><main id="pg"><div class="sk" style="height:46px;width:240px;margin-bottom:20px"></div><div class="cg"><div class="sk" style="height:220px"></div><div class="sk" style="height:220px"></div><div class="sk" style="height:220px"></div></div></main>
+<script src="config.js"></script><script src="vibe.js"></script><script src="shell.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+run(async()=>{
+const CH={map:new Map(),pin:null,locked:false};let RT_OK=false,SB=null;
+function loadChat(){$('#pg').innerHTML=pgHead('الشات','اتكلم مع باقي الأعضاء لحظيًا.')+`<div class="ch"><div class="ch-h"><span>شات المجتمع</span><small class="muted" id="chS"></small></div><div class="ch-pin" id="chPin" hidden></div>
+ <div class="ch-l" id="chL" aria-live="polite"><div class="sk" style="height:40px;width:60%"></div></div><div class="ch-n" id="chN" hidden>الشات مقفول حاليًا</div>
+ <form class="ch-c" id="chF"><input id="chI" maxlength="500" placeholder="اكتب رسالتك..." autocomplete="off" enterkeyhint="send"><button class="btn btn-p">إرسال</button></form></div>`;
+ $('#chF').onsubmit=e=>{e.preventDefault();const i=$('#chI'),b=i.value.trim();if(!b)return;i.value='';guard(async()=>{const r=await vpost('aa_vc_msgs',{body:b});addMsg(r[0],true)}).then(()=>i.focus())};
+ $('#chL').onclick=e=>{const a=e.target.closest('[data-pn],[data-dm]');if(!a)return;guard(async()=>{const id=+(a.dataset.pn||a.dataset.dm);
+  if(a.dataset.dm){await vdel('aa_vc_msgs?id=eq.'+id);CH.map.delete(id)}else{const m=CH.map.get(id);await vpatch('aa_vc_msgs?id=eq.'+id,{pinned:!m.pinned});m.pinned=!m.pinned}draw()})};
+ (async()=>{try{const [ms,st]=await Promise.all([vget('aa_vc_msgs?select=*&order=id.desc&limit=60'),vget('aa_vc_settings?select=chat_locked')]);
+  ms.reverse().forEach(m=>CH.map.set(m.id,m));CH.locked=!!(st[0]&&st[0].chat_locked);draw(true);lockUI()}catch(_){$('#chL').innerHTML='<div class="empty">تعذّر تحميل الشات.</div>'}rtStart()})()}
+function lockUI(){const l=CH.locked&&!ADM;$('#chN').hidden=!l;$('#chI').disabled=l;$('#chF button').disabled=l}
+function draw(stick){const l=$('#chL');if(!l)return;const near=stick||l.scrollHeight-l.scrollTop-l.clientHeight<120;const ms=[...CH.map.values()].sort((a,b)=>a.id-b.id);
+ const pin=ms.filter(m=>m.pinned).pop();const pe=$('#chPin');pe.hidden=!pin;if(pin)pe.innerHTML='📌 <b>'+esc(pin.name)+':</b> '+esc(pin.body);
+ l.innerHTML=ms.length?ms.map(m=>{const me=m.user_id===ME_ID;return `<div class="ms ${me?'me':''} ${m.is_staff?'stf':''}"><small>${esc(m.name)}${m.is_staff?' · المدرّس':''}<span>${new Date(m.created_at).toLocaleTimeString('ar-EG',{hour:'numeric',minute:'2-digit'})}</span></small><p>${esc(m.body)}</p>
+  ${ADM||me?`<div class="ac">${ADM?`<button data-pn="${m.id}">${m.pinned?'إلغاء التثبيت':'تثبيت'}</button>`:''}<button data-dm="${m.id}">حذف</button></div>`:''}</div>`}).join(''):'<div class="empty">ابدأ المحادثة 👋</div>';
+ if(near)l.scrollTop=l.scrollHeight}
+function addMsg(m,stick){if(CH.map.has(m.id)&&!stick)return;CH.map.set(m.id,m);draw(stick||false)}
+function rtStart(){try{SB=window._VSB=window._VSB||supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},realtime:{params:{eventsPerSecond:10}}});
+ SB.realtime.setAuth(VU().token);
+ SB.channel('vc-'+ME_ID).on('postgres_changes',{event:'*',schema:'public',table:'aa_vc_msgs'},p=>{if(p.eventType==='DELETE'){CH.map.delete(p.old.id);draw()}else addMsg(p.new)})
+  .on('postgres_changes',{event:'*',schema:'public',table:'aa_vc_settings'},p=>{if(p.new){CH.locked=!!p.new.chat_locked;lockUI()}})
+  .subscribe(s=>{RT_OK=s==='SUBSCRIBED'});
+ setInterval(async()=>{await vrefresh();try{SB.realtime.setAuth(VU().token)}catch(_){}},20*60*1000)}catch(_){}}
+/* احتياطي: لو الـ Realtime مش شغّال بيفحص كل 6 ثواني (والتاب ظاهر بس) */
+setInterval(async()=>{if(RT_OK||document.hidden)return;
+ try{const last=Math.max(0,...CH.map.keys());(await vget('aa_vc_msgs?select=*&id=gt.'+last+'&order=id')).forEach(m=>addMsg(m))}catch(_){}},6000);
+
+
+loadChat()});
+</script></body></html>
