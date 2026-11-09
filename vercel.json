@@ -1,0 +1,46 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/seller",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/seller.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/become-seller.html",
+      "destination": "/become-seller",
+      "permanent": true
+    },
+    {
+      "source": "/application-status.html",
+      "destination": "/application-status",
+      "permanent": true
+    },
+    {
+      "source": "/pages/become-seller",
+      "destination": "/become-seller",
+      "permanent": true
+    },
+    {
+      "source": "/pages/application-status",
+      "destination": "/application-status",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/become-seller",
+      "destination": "/pages/become-seller.html"
+    },
+    {
+      "source": "/application-status",
+      "destination": "/pages/application-status.html"
+    }
+  ]
+}

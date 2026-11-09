@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>انضم كبائع شريك | نَسَق</title>
+  <meta name="description" content="افتح حساب تاجر أو صاحب متجر شريك في نَسَق وابدأ البيع لعملاء المنصة.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2315171c'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%232f45d4'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/mobile-app.css">
+  <script src="/assets/js/skeleton.js"></script>
+  <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/onboarding.css">
+  <link rel="stylesheet" href="/assets/css/wizard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="/assets/js/nasaq-config.js"></script>
+  <script src="/assets/js/nasaq-links.js"></script>
+  <script src="/assets/js/api-shim.js"></script>
+  <script src="/assets/js/buyer-location.js"></script>
+  <script defer src="/assets/js/cloud.js"></script>
+  <script defer src="/assets/js/products.js"></script>
+  <script defer src="/assets/js/market.js"></script>
+  <script defer src="/assets/js/cart.js"></script>
+  <script defer src="/assets/js/i18n-dict.js"></script>
+  <script defer src="/assets/js/i18n.js"></script>
+  <script defer src="/assets/js/geo.js"></script>
+  <script defer src="/assets/js/ui.js"></script>
+  <script defer src="/assets/js/onboarding.js"></script>
+  <script defer src="/assets/js/wizard.js"></script>
+  <script defer src="/assets/js/signup-wizards.js"></script>
+</head>
+<body data-page="become-seller">
+  <header id="site-header" class="site-header"></header>
+  <noscript><p style="padding:1rem;text-align:center">يحتاج هذا النموذج إلى تفعيل JavaScript.</p></noscript>
+
+  <main id="main" tabindex="-1">
+    <div class="container">
+      <div class="onboarding onboarding--wide">
+        <div class="tabs" role="list" aria-label="نوع الانضمام">
+          <a class="tab" role="listitem" href="/become-seller" aria-current="page">تاجر / صاحب محل</a>
+          <a class="tab" role="listitem" href="/become-rider">مندوب توصيل</a>
+        </div>
+
+        <div class="onboarding__head">
+          <h1>إنشاء حساب تاجر / صاحب محل</h1>
+          <p class="onboarding__sub">ابدأ البيع ووسّع تجارتك لتصل إلى آلاف عملاء نَسَق بخطوات موثوقة وسريعة.</p>
+        </div>
+
+        <form id="seller-form" class="wz" data-wizard="seller" novalidate>
+      <div data-wz-stepper></div>
+      <p class="wz-notice" data-wz-notice role="status" hidden></p>
+      <div class="wz-body">
+      <section class="wz-step" data-step="account" data-label="wz_st_account" aria-labelledby="wz-t-account" hidden>
+        <div class="wz-step__head">
+          <h2 id="wz-t-account" data-wz-title tabindex="-1" data-i18n="wz_s1_title">حساب التاجر</h2>
+          <p data-i18n="wz_s1_desc">بيانات الدخول الخاصة بك كصاحب المتجر.</p>
+        </div>
+        <p class="field__error wz-step-error" data-wz-step-error role="alert"></p>
+        <div class="wz-fields wz-fields--2">
+          <p class="wz-notice span-2" data-show-if="loggedIn" hidden data-i18n="wz_logged_in_note">أنت مسجَّل الدخول بالفعل، سنستخدم حسابك الحالي ولا تحتاج كلمة مرور جديدة.</p>
+          <div class="field span-2">
+            <label for="s-name" data-i18n="wz_f_name">الاسم بالكامل</label>
+            <input class="input" id="s-name" name="name" type="text" placeholder="أدخل اسمك الثلاثي أو الرباعي كما في البطاقة" data-i18n-placeholder="wz_ph_fullname" autocomplete="name" data-rules="required">
+          </div>
+          <div class="field">
+            <label for="s-email" data-i18n="wz_f_email">البريد الإلكتروني</label>
+            <input class="input" id="s-email" name="email" type="email" inputmode="email" dir="ltr" autocapitalize="off" spellcheck="false" placeholder="name@example.com" autocomplete="email" data-rules="required email">
+          </div>
+          <div class="field">
+            <label for="s-phone" data-i18n="wz_f_phone">رقم الهاتف</label>
+            <input class="input" id="s-phone" name="phone" type="tel" inputmode="tel" dir="ltr" placeholder="01050447879" autocomplete="tel" data-rules="required phone">
+          </div>
+          <div class="field" data-hide-if="loggedIn">
+            <label for="s-pass" data-i18n="wz_f_password">كلمة المرور</label>
+            <input class="input" id="s-pass" name="password" type="password" placeholder="6 أحرف أو أرقام على الأقل" data-i18n-placeholder="wz_ph_pass" autocomplete="new-password" data-rules="required password:6">
+            <div data-wz-strength data-for="password"></div>
+            <p class="field__hint" id="s-pass-hint" data-i18n="wz_pass_hint">6 أحرف على الأقل. الأفضل خلط الحروف والأرقام والرموز.</p>
+          </div>
+          <div class="field" data-hide-if="loggedIn">
+            <label for="s-pass2" data-i18n="wz_f_password2">تأكيد كلمة المرور</label>
+            <input class="input" id="s-pass2" name="password2" type="password" placeholder="أعد إدخال كلمة المرور" data-i18n-placeholder="wz_ph_pass2" autocomplete="new-password" data-rules="required match:#s-pass">
+          </div>
+        </div>
+      </section>
+      <section class="wz-step" data-step="store" data-label="wz_st_store" aria-labelledby="wz-t-store" hidden>
+        <div class="wz-step__head">
+          <h2 id="wz-t-store" data-wz-title tabindex="-1" data-i18n="wz_s2_title">بيانات المتجر</h2>
+          <p data-i18n="wz_s2_desc">عرّف المشترين بمتجرك: اسمه ونوع منتجاتك ونبذة قصيرة.</p>
+        </div>
+        <p class="field__error wz-step-error" data-wz-step-error role="alert"></p>
+        <div class="wz-fields wz-fields--2">
+          <div class="field span-2">
+            <label for="s-store-name" data-i18n="wz_f_store_name">اسم المتجر / المحل التجاري</label>
+            <input class="input" id="s-store-name" name="storeName" type="text" placeholder="مثال: نَسَق تك ستور" data-i18n-placeholder="wz_ph_store_name" data-rules="required">
+          </div>
+          <div class="field">
+            <label for="s-category" data-i18n="wz_f_category">نوع المنتجات</label>
+            <select class="select" id="s-category" name="category" data-rules="required" data-wz-categories></select>
+          </div>
+          <div class="field">
+            <label for="s-license"><span data-i18n="wz_f_license">رقم الترخيص / السجل التجاري</span> <span class="wz-opt" data-i18n="wz_optional">(اختياري)</span></label>
+            <input class="input" id="s-license" name="license" type="text" placeholder="رقم السجل التجاري إن وجد" data-i18n-placeholder="wz_ph_license" dir="ltr">
+          </div>
+          <div class="field span-2">
+            <label for="s-desc"><span data-i18n="wz_f_description">نبذة عن المتجر</span> <span class="wz-opt" data-i18n="wz_optional">(اختياري)</span></label>
+            <textarea class="textarea" id="s-desc" name="description" rows="3" maxlength="300" placeholder="ماذا تبيع؟ وما الذي يميّز متجرك؟" data-i18n-placeholder="wz_ph_description"></textarea>
+          </div>
+          <div class="field span-2">
+            <span class="label" data-i18n="wz_f_logo">شعار المتجر</span>
+            <div class="dropzone">
+              <svg class="icon dropzone__icon" aria-hidden="true"><use href="#i-store"></use></svg>
+              <strong data-dz-label data-i18n="wz_dz_logo">انقر لاختيار شعار المتجر</strong>
+              <small data-i18n="wz_dz_logo_hint">صورة مربعة واضحة</small>
+              <input type="file" accept="image/*" name="logo" id="f-logo" data-doc="logo" data-rules="image" aria-label="شعار المتجر" data-i18n-aria-label="wz_f_logo">
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <section class="wz-step" data-step="location" data-label="wz_st_store_location" aria-labelledby="wz-t-location" hidden>
+        <div class="wz-step__head">
+          <h2 id="wz-t-location" data-wz-title tabindex="-1" data-i18n="wz_s3_title">موقع المتجر</h2>
+          <p data-i18n="wz_s3_desc">الموقع إلزامي، والمتجر بدونه لا يظهر لأي مشترٍ. يرى المشترون متجرك ضمن نطاق 50 كم منهم.</p>
+        </div>
+        <p class="field__error wz-step-error" data-wz-step-error role="alert"></p>
+        <div class="wz-fields">
+          <div class="field">
+            <label for="s-address" data-i18n="wz_f_address">عنوان المحل بالتفصيل</label>
+            <textarea class="textarea" id="s-address" name="address" rows="2" placeholder="المحافظة، المركز أو الحي، اسم الشارع، علامة مميزة بجوار المحل" data-i18n-placeholder="wz_ph_address" data-rules="required"></textarea>
+          </div>
+          <div class="field">
+            <span class="label sr-only" id="s-geo-label" data-i18n="wz_f_location">الموقع</span>
+            <div data-geo-root aria-labelledby="s-geo-label" data-focus-for="geo" tabindex="-1"></div>
+            <p class="field__error" id="s-geo-label-err" data-err-for="geo" data-wz-custom aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+      <section class="wz-step" data-step="docs" data-label="wz_st_docs" aria-labelledby="wz-t-docs" hidden>
+        <div class="wz-step__head">
+          <h2 id="wz-t-docs" data-wz-title tabindex="-1" data-i18n="wz_s4_title">الهوية والصور</h2>
+          <p data-i18n="wz_s4_desc">نراجعها قبل اعتماد المتجر، وتبقى خاصة بفريق نَسَق فقط.</p>
+        </div>
+        <p class="field__error wz-step-error" data-wz-step-error role="alert"></p>
+        <div class="wz-fields wz-fields--2">
+          <div class="field span-2">
+            <label for="s-nid" data-i18n="wz_f_nid">الرقم القومي (14 رقم)</label>
+            <input class="input" id="s-nid" name="nid" type="text" inputmode="numeric" dir="ltr" placeholder="أدخل 14 رقماً بالبطاقة الشخصية" data-i18n-placeholder="wz_ph_nid" data-rules="required nid">
+          </div>
+          <div class="field span-2">
+            <span class="label" data-i18n="wz_f_photo_personal">صورة شخصية حديثة</span>
+            <div class="dropzone">
+              <svg class="icon dropzone__icon" aria-hidden="true"><use href="#i-user"></use></svg>
+              <strong data-dz-label data-i18n="wz_dz_personal">انقر لرفع الصورة الشخصية</strong>
+              <small data-i18n="wz_dz_personal_hint">PNG أو JPG (صورة واضحة للوجه)</small>
+              <input type="file" accept="image/*" name="doc_personalPhoto" id="f-personalPhoto" data-doc="personalPhoto" data-rules="image" aria-label="صورة شخصية حديثة" data-i18n-aria-label="wz_f_photo_personal">
+            </div>
+          </div>
+          <div class="field span-2">
+            <span class="label" data-i18n="wz_f_photo_storefront">صورة واجهة المحل أو اللافتة</span>
+            <div class="dropzone">
+              <svg class="icon dropzone__icon" aria-hidden="true"><use href="#i-store"></use></svg>
+              <strong data-dz-label data-i18n="wz_dz_storefront">انقر لرفع صورة واجهة المحل أو اللافتة</strong>
+              <small data-i18n="wz_dz_storefront_hint">تساعد صورة الواجهة المتصفحين والعملاء على تمييز موقعك بدقة</small>
+              <input type="file" accept="image/*" name="doc_storefrontPhoto" id="f-storefrontPhoto" data-doc="storefrontPhoto" data-rules="image" aria-label="صورة واجهة المحل أو اللافتة" data-i18n-aria-label="wz_f_photo_storefront">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="wz-step" data-step="review" data-label="wz_st_review" aria-labelledby="wz-t-review" hidden>
+        <div class="wz-step__head">
+          <h2 id="wz-t-review" data-wz-title tabindex="-1" data-i18n="wz_apply_review_title">مراجعة وإرسال الطلب</h2>
+          <p data-i18n="wz_review_desc">تأكد أن كل شيء صحيح، ثم وافق على الشروط لإتمام التسجيل.</p>
+        </div>
+        <p class="field__error wz-step-error" data-wz-step-error role="alert"></p>
+        <div class="wz-summary" data-wz-summary></div>
+        <div class="notice">
+          <svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>
+          <div>
+            <strong data-i18n="wz_notice_seller_title">تنويه هام بشأن اعتماد وتفعيل الحساب</strong>
+            <p data-i18n="wz_notice_seller">تتم مراجعة حسابك واعتماده خلال 12 ساعة من فريق عمليات نَسَق بعد التحقق من المستندات والصور المرفقة، وسيصلك إشعار فور الاعتماد.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="check" for="f-terms">
+            <input type="checkbox" id="f-terms" name="terms" data-nodraft data-rules="checked">
+            <span data-i18n="wz_terms_seller">أوافق على شروط الاستخدام واتفاقية بائعي أسواق نَسَق وسياسة الخصوصية</span>
+          </label>
+        </div>
+      </section>
+      </div>
+      <div class="wz-nav">
+        <button type="button" class="btn btn--ghost btn--lg" data-wz-prev hidden><span data-i18n="wz_prev">السابق</span></button>
+        <button type="button" class="btn btn--accent btn--lg" data-wz-next aria-disabled="true"><span data-i18n="wz_next">التالي</span></button>
+        <button type="submit" class="btn btn--accent btn--lg" data-wz-submit data-label="wz_submit_seller" hidden><span data-wz-submit-label data-i18n="wz_submit_seller">تقديم طلب فتح حساب تاجر</span></button>
+      </div>
+      <div class="wz-success" data-wz-success hidden>
+        <div class="wz-success__icon" aria-hidden="true">✓</div>
+        <h2 data-wz-title tabindex="-1" data-i18n="wz_ok_app_title">طلبك قيد المراجعة</h2>
+        <p data-i18n="wz_ok_app_desc">استلمنا طلبك وسيراجعه فريق نَسَق خلال 12 ساعة. احتفظ برقم الطلب للمتابعة.</p>
+        <div class="wz-success__id"><small data-i18n="wz_ok_app_id">رقم الطلب</small><strong data-wz-reqid>—</strong></div>
+        <a class="btn btn--accent btn--lg" data-wz-continue href="/application-status" data-i18n="wz_ok_app_cta">متابعة حالة الطلب</a>
+        <p class="wz-success__count" data-wz-countdown></p>
+      </div>
+    </form>
+
+        <p class="onboarding__crosslink">لديك حساب بائع مسجل بالفعل؟ <a href="/auth">تسجيل الدخول من هنا</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+</body>
+</html>

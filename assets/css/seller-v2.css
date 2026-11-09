@@ -1,0 +1,71 @@
+/* ==========================================================================
+   css/seller-v2.css — تطوير شكل لوحة البائع (يُحمَّل بعد seller.css ويعتمد على نفس المتغيرات)
+   لا يغيّر أي سلوك؛ فقط تحسين المظهر: بطاقة ترحيب، KPI أوضح، قائمة جانبية أنعم، جدول ومحادثة أرقى.
+   ========================================================================== */
+
+/* ---- القائمة الجانبية ---- */
+.dash__side { background: linear-gradient(180deg, var(--c-nav) 0%, color-mix(in srgb, var(--c-nav) 88%, var(--c-accent)) 100%); }
+.dash__logo { font-size: 1.5rem; padding-block: var(--sp-2) var(--sp-3); }
+.dash__nav a { margin-inline: var(--sp-3); border-radius: 12px; transition: background .18s ease, transform .18s ease; }
+.dash__nav a:hover { transform: translateX(-2px); }
+.dash__nav a[aria-current="page"] { background: color-mix(in srgb, var(--c-on-dark) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-on-dark) 14%, transparent); }
+.dash__group { padding-inline: calc(var(--sp-5) + var(--sp-3)); }
+
+/* ---- الشريط العلوي ---- */
+.dash__top { background: color-mix(in srgb, var(--c-bg) 86%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); }
+.dash__hi { font-size: var(--fs-sm); color: var(--c-ink-2); }
+.dash__me { border: 1px solid var(--c-line); border-radius: var(--r-pill); padding-inline-end: 0.9rem; }
+
+/* ---- الخلفية والبطاقات ---- */
+.dash__view { padding-block: var(--sp-5) var(--sp-7); }
+.dcard { border-radius: 18px; box-shadow: 0 1px 2px rgba(21, 23, 28, .04), 0 8px 24px -16px rgba(21, 23, 28, .18); transition: box-shadow .2s ease, transform .2s ease; }
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(21, 23, 28, .05), 0 16px 32px -18px rgba(47, 69, 212, .35); }
+.kpi__l .icon { display: grid; place-items: center; width: 34px; height: 34px; padding: 7px; border-radius: 10px; background: var(--c-accent-soft); color: var(--c-accent); }
+.kpi__v { font-size: 1.95rem; letter-spacing: -.01em; }
+.dhead h1 { letter-spacing: -.01em; }
+
+/* ---- بطاقة الترحيب (dashboard) ---- */
+.dhero { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-5);
+  padding: var(--sp-6); border-radius: 22px; color: var(--c-on-dark);
+  background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--c-accent) 70%, #fff 0%) 0%, var(--c-accent-deep) 55%, var(--c-nav) 100%);
+  box-shadow: 0 24px 48px -28px rgba(31, 47, 154, .7); }
+.dhero__main { display: grid; gap: var(--sp-2); min-width: 0; flex: 1 1 320px; }
+.dhero__eyebrow { display: inline-flex; align-items: center; gap: .45rem; font-size: var(--fs-xs); letter-spacing: .06em; color: var(--c-on-dark-2); }
+.dhero__eyebrow .icon { width: 1rem; height: 1rem; }
+.dhero h2 { font-size: var(--fs-lg); font-family: var(--font-display); overflow-wrap: anywhere; }
+.dhero__sub { max-width: 60ch; color: var(--c-on-dark-2); font-size: var(--fs-sm); line-height: 1.8; }
+.dhero__sub strong { color: var(--c-on-dark); }
+.dhero__chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-2); }
+.hero-chip { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .8rem; border-radius: var(--r-pill); font-size: var(--fs-xs); font-weight: 600; text-decoration: none;
+  background: color-mix(in srgb, #fff 14%, transparent); color: var(--c-on-dark); box-shadow: inset 0 0 0 1px color-mix(in srgb, #fff 22%, transparent); }
+.hero-chip .icon { width: .9rem; height: .9rem; }
+.hero-chip--ok .icon { color: var(--c-success-on-dark); }
+.hero-chip--warn { background: color-mix(in srgb, var(--c-warning-icon) 30%, transparent); }
+.hero-chip:hover { background: color-mix(in srgb, #fff 24%, transparent); }
+.dhero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.dhero__actions .btn--primary { background: #fff; color: var(--c-accent-deep); }
+.dhero__actions .btn--primary:hover { background: var(--c-accent-soft); }
+.dhero__actions .btn--ghost { color: var(--c-on-dark); border-color: color-mix(in srgb, #fff 40%, transparent); }
+.dhero__actions .btn--ghost:hover { background: color-mix(in srgb, #fff 14%, transparent); }
+
+/* ---- الجداول ---- */
+.dtable th { position: sticky; top: 0; background: var(--c-surface-hi); font-size: var(--fs-xs); letter-spacing: .03em; }
+.dtable tbody tr { transition: background .15s ease; }
+
+/* ---- الدعم: محادثة أوضح ---- */
+.thread li { position: relative; box-shadow: 0 1px 2px rgba(21, 23, 28, .05); }
+.thread__who { display: block; margin-bottom: .2rem; font-size: var(--fs-xs); color: var(--c-ink-3); font-weight: 600; }
+.thread__support { background: var(--c-accent); color: var(--c-accent-ink); }
+.thread__support .thread__who, .thread__support small { color: color-mix(in srgb, var(--c-accent-ink) 78%, transparent); }
+.tickets li { border-radius: 14px; }
+
+/* ---- الشاشات الصغيرة ---- */
+@media (max-width: 720px) {
+  .dhero { padding: var(--sp-5); border-radius: 18px; }
+  .dhero__actions { width: 100%; }
+  .dhero__actions .btn { flex: 1 1 auto; justify-content: center; }
+  .kpi__v { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dash__nav a, .dcard, .kpi:hover { transition: none; transform: none; }
+}
