@@ -29,7 +29,7 @@
     if (wanted && tabs.some((t) => t.dataset.tab === wanted)) activate(wanted);
 
     /* موظف دعم مسجّل دخول بالفعل → لوحة الدعم بدل صفحة الدخول */
-    try { const cur = JSON.parse(localStorage.getItem('nasaq_session_v1') || 'null'); if (cur && cur.role === 'support') location.replace('/support'); } catch (_) { /* تجاهل */ }
+    try { const cur = JSON.parse(localStorage.getItem('nasaq_session_v1') || 'null'); if (cur && cur.role === 'support') (window.NasaqLinks ? window.NasaqLinks.go('main', '/support') : location.replace('/support')); } catch (_) { /* تجاهل */ }
   }
 
   /* ---------- موقع المستخدم عند التسجيل (داخل نموذج إنشاء الحساب) ---------- */
@@ -77,7 +77,8 @@
         if (!response.ok) throw new Error(data.error || 'بيانات الدخول غير صحيحة.');
         if (window.NasaqCloud) window.NasaqCloud.saveSession(data);
         /* موظف الدعم (حسب الداتا بيس) يروح لصفحة الدعم على طول */
-        location.href = (data.user && data.user.role === 'support') ? '/support' : '/';
+        if (data.user && data.user.role === 'support' && window.NasaqLinks) { window.NasaqLinks.go('main', '/support'); return; }
+        location.href = '/';
       } catch (error) {
         formError(loginForm, error.message);
       } finally {

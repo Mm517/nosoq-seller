@@ -69,7 +69,7 @@
 
   /* ---------- الهيكل ---------- */
   const NAV = [
-    ['عام', [['dashboard', 'grid', 'لوحة التحكم'], ['products', 'box', 'المنتجات'], ['orders', 'list', 'الطلبات'], ['stats', 'chart', 'الإحصائيات'], ['wallet', 'cash', 'الأرباح والمحفظة'], ['ads', 'megaphone', 'الإعلانات']]],
+    ['عام', [['dashboard', 'grid', 'لوحة التحكم'], ['products', 'box', 'المنتجات'], ['orders', 'list', 'الطلبات'], ['stats', 'chart', 'الإحصائيات'], ['wallet', 'cash', 'الأرباح والمحفظة'], ['ads', 'megaphone', 'الإعلانات'], ['coupons', 'tag', 'الكوبونات']]],
     ['الحساب', [['support', 'chat', 'الدعم'], ['settings', 'gear', 'إعدادات المتجر']]]
   ];
   const root = $('#dash-root');
